@@ -1,0 +1,13 @@
+// Định dạng cho lệnh MAC: rd, rs1, rs2
+// rd vừa là thanh ghi nguồn vừa là thanh ghi đích.
+format MAC_R {
+    className = 'MAC_R';
+    // Kế thừa từ định dạng R-type cơ bản
+    base = R;
+    // Đoạn mã giải mã
+    decode = {
+        // rd, rs1, rs2 được kế thừa từ R
+    };
+    // Đoạn mã assembly
+    assembly = "mac ${rd}, ${rs1}, ${rs2}";
+}
