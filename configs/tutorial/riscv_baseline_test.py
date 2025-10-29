@@ -1,5 +1,5 @@
-# configs/tutorial/riscv_mac_test.py
-# gem5 configuration for testing MAC custom instruction
+# configs/tutorial/riscv_baseline_test.py
+# Baseline test WITHOUT MAC instruction (for comparison)
 
 from gem5.components.boards.simple_board import SimpleBoard
 from gem5.components.cachehierarchies.classic.no_cache import NoCache
@@ -10,7 +10,7 @@ from gem5.isas import ISA
 from gem5.resources.resource import BinaryResource
 from gem5.simulate.simulator import Simulator
 
-# System configuration
+# System configuration (same as MAC test for fair comparison)
 cache_hierarchy = NoCache()
 memory = SingleChannelDDR4_2400(size="2GiB")
 
@@ -27,7 +27,7 @@ board = SimpleBoard(
 
 # Set binary workload - using relative path from gem5 directory
 board.set_se_binary_workload(
-    BinaryResource(local_path="../riscv_test/test_mac")
+    BinaryResource(local_path="../riscv_test/test_baseline")
 )
 
 # Run simulation

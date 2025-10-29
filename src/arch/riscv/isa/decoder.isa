@@ -2613,6 +2613,21 @@ decode QUADRANT default Unknown::unknown() {
             }
         }
 
+        // Custom instruction MAC (Multiply-Accumulate)
+        // Using custom-0 opcode space (0x02)
+        // Encoding: mac rd, rs1, rs2  =>  rd = rd + (rs1 * rs2)
+        0x02: decode FUNCT3 {
+            format ROp {
+                0x0: decode FUNCT7 {
+                    0x00: mac({{
+                        // MAC operation: rd = rd + (rs1 * rs2)
+                        // Note: Rd appears on both sides - read before write
+                        Rd = rvSext(Rd + (Rs1_sd * Rs2_sd));
+                    }}, IntMultOp);
+                }
+            }
+        }
+
         0x0d: UOp::lui({{
             Rd = (sext<20>(imm) << 12);
         }});
@@ -6361,12 +6376,5 @@ decode QUADRANT default Unknown::unknown() {
         }
 
         0x1e: M5Op::M5Op();
-        '0x02': decode FUNCT3 {
-            '000': decode FUNCT7 {
-                '0000000': MAC_R('mac');
-                default: Inst::illegal();
-            };
-            default: Inst::illegal();
-        };
     }
 }
