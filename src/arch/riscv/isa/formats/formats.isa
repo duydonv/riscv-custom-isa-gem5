@@ -30,7 +30,6 @@
 
 // Include the basic format
 ##include "basic.isa"
-##include "mac.isa"
 
 // Include the type formats
 ##include "standard.isa"
